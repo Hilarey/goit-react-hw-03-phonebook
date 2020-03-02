@@ -1,0 +1,14 @@
+.list {
+  
+}
+.item {
+  padding: 4px;
+}
+.button {
+  width: 90px;
+  border-radius: 10%;
+  background-color: #fff;
+  font: inherit;
+  font-size: 12px;
+  margin-left: 10px;
+}
