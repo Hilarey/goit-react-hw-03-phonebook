@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import shortid from "shortid";
-import Layout from "./Layout/Layout";
-import ContactForm from "./ContactForm/ContactForm";
-import ContactList from "./ContactList/ContactList";
-import Filter from "./Filter/Filter";
+import withTheme from "../../HOC/withTheme";
+import ToggleTheme from "../ToggleTheme/ToggleTheme.js";
+import ContactForm from "../ContactForm/ContactForm";
+import ContactList from "../ContactList/ContactList";
+import Filter from "../Filter/Filter";
+import styles from "../PhoneBook/PhoneBook.module.css";
 
-export default class App extends Component {
+class PhoneBook extends Component {
   state = {
     contacts: [],
     filter: ""
@@ -69,12 +71,14 @@ export default class App extends Component {
 
   render() {
     const { filter, contacts } = this.state;
+    const { night } = this.props;
     const getVisibleTasks = this.handleVisibleTasks();
     return (
-      <Layout>
-        <h1>Phonebook</h1>
+      <>
+        <h1 className={night ? styles.night : null}>Phonebook</h1>
+        <ToggleTheme />
         <ContactForm onAddContact={this.handleAddContact} />
-        <h2>Contacts</h2>
+        <h2 className={night ? styles.night : null}>Contacts</h2>
         {contacts.length >= 2 && (
           <Filter value={filter} onFilterChange={this.handleFilterChange} />
         )}
@@ -82,7 +86,9 @@ export default class App extends Component {
           contacts={getVisibleTasks}
           onRemoveContact={this.handleRemoveContact}
         />
-      </Layout>
+      </>
     );
   }
 }
+
+export default withTheme(PhoneBook);

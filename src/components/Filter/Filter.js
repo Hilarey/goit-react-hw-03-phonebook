@@ -1,10 +1,12 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import withTheme from "../../HOC/withTheme";
+import styles from "./Filter.module.css";
 
-export default function Filter({ value, onFilterChange }) {
+const Filter = ({ value, onFilterChange, night }) => {
   return (
     <div>
-      <h4>Find contacts by name</h4>
+      <h4 className={night ? styles.night : null}>Find contacts by name</h4>
       <input
         type="text"
         value={value}
@@ -13,9 +15,11 @@ export default function Filter({ value, onFilterChange }) {
       />
     </div>
   );
-}
+};
 
 Filter.propTypes = {
   value: PropTypes.string.isRequired,
-  onFilterChange: PropTypes.func.isRequired,
+  onFilterChange: PropTypes.func.isRequired
 };
+
+export default withTheme(Filter);

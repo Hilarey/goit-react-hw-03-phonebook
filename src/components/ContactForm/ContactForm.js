@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import withTheme from "../../HOC/withTheme";
 import styles from "./ContactForm.module.css";
 
-export default class ContactForm extends Component {
+class ContactForm extends Component {
   static propTypes = {
     onAddContact: PropTypes.func.isRequired
   };
@@ -28,10 +29,11 @@ export default class ContactForm extends Component {
 
   render() {
     const { name, number } = this.state;
+    const { night } = this.props;
     return (
       <div className={styles.form}>
         <form onSubmit={this.handleSubmit}>
-          <label>
+          <label className={night ? styles.night : null}>
             Name
             <br />
             <input
@@ -44,7 +46,7 @@ export default class ContactForm extends Component {
           </label>
           <br />
           <br />
-          <label>
+          <label className={night ? styles.night : null}>
             Number
             <br />
             <input
@@ -65,3 +67,5 @@ export default class ContactForm extends Component {
     );
   }
 }
+
+export default withTheme(ContactForm);
